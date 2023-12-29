@@ -1,0 +1,20 @@
+plugin: servicenow.servicenow.now
+instance: mytest
+#username: admin
+#password: password
+table: cmdb_ci_ip_switch
+selection_order: name
+fields: [serial_number,name,ip_address,manufacturer,company]
+compose:
+  sn_tags: sn_sys_tags.replace(" ", "").split(',')
+  ansible_host: sn_ip_address
+  ansible_user: '"{{svcuser}}"'
+  ansible_password: '"{{svcpassword}}"'
+filter_results: operational_status=1^fqdnISNOTEMPTY
+keyed_groups:
+  - key: sn_manufacturer | lower
+    prefix: ''
+    separator: ''
+  - key: sn_company | lower
+    prefix: ''
+    separator: ''

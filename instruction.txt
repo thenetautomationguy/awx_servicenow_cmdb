@@ -1,0 +1,35 @@
+1. Administration > Credential Types > Add
+
+2. Input configuration > YAML
+
+3. Copy & Paste
+
+fields:
+  - id: supp_snow_username
+    type: string
+    label: Username
+  - id: supp_snow_password
+    type: string
+    label: Password
+    secret: true
+required:
+  - supp_snow_username
+  - supp_snow_password
+
+4. Injector configuration > YAML
+
+5. Copy & Paste
+
+env:
+  SN_PASSWORD: '{{ supp_snow_password }}'
+  SN_USERNAME: '{{ supp_snow_username }}'
+
+6. Resources > Credentials > Add
+
+7. Choose the name of the created custom credential as the Credential Type.
+
+8. Resources > Inventories > Add inventory
+
+9. Navigate to Sources & Click on Add
+
+10. Choose the credential you created and select the inventory file.
